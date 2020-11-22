@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 import sys
+import re
 
 import matplotlib.pyplot as plt
 
@@ -15,12 +16,14 @@ if __name__ == '__main__':
     date_list =list(h5file.keys())
     
     for date in date_list:
-        R0 = h5file[date][()]
-        print("Processing Date:",date,np.mean(R0),np.max(R0))
-        plt.imshow(R0[:,:].astype(np.float32),vmin=0,vmax=5,origin='lower')
-        plt.savefig('../../result/DWD_RYDL/tstout/rain_figure_'+date+'.png')
-
-        
+        if re.search(r'00$',date):
+            R0 = h5file[date][()]
+            print("Processing Date:",date,np.mean(R0),np.max(R0))
+            plt.imshow(R0[:,:].astype(np.float32),vmin=0,vmax=5,origin='lower')
+            plt.savefig('../../result/DWD_RYDL/tstout/rain_figure_'+date+'.png')
+        else:
+            print("skipped",date)
+        import pdb;pdb.set_trace()
 
         
 

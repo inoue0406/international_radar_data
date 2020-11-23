@@ -122,7 +122,7 @@ def dl_prep_NEXRAD(b_d,site,fcsv):
 
     R0 = grids.fields["rainfall"]["data"]
 
-    print("%s,%s,%f,%f,%f"% (b_d,dtime,dtsec,R0.mean(),R0.max()),file=fcsv)
+    print("%s,%s,%f,%f,%f"% (b_d,dtime,dtsec,R0.mean(),R0.max()),file=fcsv,flush=True)
 
     # test write
     #for z in range(nlevel):

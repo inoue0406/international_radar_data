@@ -38,7 +38,7 @@ if __name__ == '__main__':
     date_list =list(h5file.keys())
     
     fcsv = open("../../data/preprocessed/DWD_list_precip.csv","w")
-    print("date,i,j,rain_mean,rain_max\n",file=fcsv)
+    print("date,date_nexrad,time_diff_sec,rain_mean,rain_max\n",file=fcsv)
 
     for date in date_list:
         if re.search(r'00$',date):

@@ -28,7 +28,6 @@ if __name__ == '__main__':
             tstr = "%03d" % t
             plt.imshow(R1[t,:,:].astype(np.float32),vmin=0,vmax=50,origin='lower')
             plt.savefig('../../result/TAASRAD19/tstout/R1_figure_'+tstr+'.png')
-            
 
         
 

@@ -68,7 +68,10 @@ def get_radar_from_aws(site, datetime_t):
             keys.append(bucket_list[i])
 
     #find the closest available radar to your datetime
-
+    if len(datetimes) == 0:
+        print('No data in dir: ')
+        return np.nan, np.nan, np.nan
+        
     closest_datetime = _nearestDate(datetimes, datetime_t)
     dtsec = closest_datetime - datetime_t
     dtsec = dtsec.total_seconds()

@@ -33,7 +33,7 @@ if __name__ == '__main__':
     file_list = sorted(glob.iglob(root_dir + '/*.hdf5'))
 
     fcsv = open("../../data/preprocessed/TAASRAD19_list_precip.csv","w")
-    print("date,i,j,rain_mean,rain_max",file=fcsv)
+    print("date,i,j,dBZ_mean,dBZ_max,rain_mean,rain_max",file=fcsv)
     
     for infile in file_list:
         print(infile)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
                     h5file = h5py.File(outfile_root+h5fname,'w')
                     h5file.create_dataset('R',data= rain_tmp)
                     # write info to file
-                    print("%s,%d,%d,%f,%f" % (h5fname,i,j,
+                    print("%s,%d,%d,%f,%f,%f,%f" % (h5fname,i,j,
                                               Rtmp.mean(),Rtmp.max(),
                                               rain_tmp.mean(),rain_tmp.max()),
                           file=fcsv,flush=True)

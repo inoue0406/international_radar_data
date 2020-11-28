@@ -11,14 +11,26 @@ import matplotlib.pyplot as plt
 import h5py
 
 if __name__ == '__main__':
-    outfile_root = "../../data/preprocessed/TAASRAD19/"
-    file_list = sorted(glob.iglob(outfile_root + '/*.h5'))
 
-    f=open('../../data/preprocessed/TAASRAD19_train_200.csv', 'w')
+    case = "all"
+    #case = "reduced"
+    outfile_root = "../../data/preprocessed/TAASRAD19/"
+
+    if case == "all":    
+        df = pd.read_csv("../../data/preprocessed/TAASRAD19_list_precip.csv")
+        file_list = df["date"].values
+    if case == "reduced":
+        df = pd.read_csv("../../data/preprocessed/TAASRAD19_list_precip_reduced.csv")
+        file_list = df["date"].values
+    else:
+        print("unknown case !!")
+
+    f=open('../../data/preprocessed/TAASRAD19_train_200_'+case+'.csv', 'w')
     print(",fname,fnext",file=f)
     count = 0
     
-    for infile in file_list:
+    for fname in file_list:
+        infile = outfile_root + fname
         print(infile)
         tstr = re.search('_T..._',infile).group()
         tnum = int(tstr[2:5])
@@ -29,4 +41,3 @@ if __name__ == '__main__':
             h5fnext = infile_next.split('/')[-1]
             print("%d,%s,%s" % (count,h5fname,h5fnext),file=f)
             count = count + 1
-

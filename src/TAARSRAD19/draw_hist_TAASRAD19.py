@@ -59,21 +59,29 @@ if __name__ == '__main__':
     df_rem = df.loc[rem]
     
     # convert dBZ to rainfall
-    df_rem.columns = ['date', 'i', 'j', 'dBZ_mean', 'dBZ_max']
-    df_rem["rain_mm_mean"]=dBZ_to_rainfall(df_rem['dBZ_mean'])
-    df_rem["rain_mm_max"]=dBZ_to_rainfall(df_rem['dBZ_max'])
+    df_rem.columns = ['date', 'i', 'j', 'dBZ_mean', 'dBZ_max','rain_mm_mean', 'rain_mm_max']
+    #df_rem["rain_mm_mean"]=dBZ_to_rainfall(df_rem['dBZ_mean'])
+    #df_rem["rain_mm_max"]=dBZ_to_rainfall(df_rem['dBZ_max'])
      
     df_rem['rain_mm_mean'].hist(bins=20)
-    plt.savefig("../../result/TAASRAD19/histogram/hist_rain_mean.png")
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_rain_mean.png")
     plt.close()    
     df_rem['rain_mm_max'].hist(bins=20)
-    plt.savefig("../../result/TAASRAD19/histogram/hist_rain_max.png")
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_rain_max.png")
     plt.close()
     df_rem['dBZ_mean'].hist(bins=20)
-    plt.savefig("../../result/TAASRAD19/histogram/hist_reflectivity_mean.png")
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_reflectivity_mean.png")
     plt.close()    
     df_rem['dBZ_max'].hist(bins=20)
-    plt.savefig("../../result/TAASRAD19/histogram/hist_reflectivity_max.png")
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_reflectivity_max.png")
+    plt.close()
+
+    # log scale
+    plt.hist(df_rem['rain_mm_mean'],bins=20,log=True)
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_rain_mean_log.png")
+    plt.close()    
+    plt.hist(df_rem['rain_mm_max'],bins=20,log=True)
+    plt.savefig("../../result/TAASRAD19/histogram/TAASRAD19_hist_rain_max_log.png")
     plt.close()
 
     for th in [0.01,0.02,0.04,0.1,0.2,0.4,1.0]:
